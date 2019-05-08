@@ -1,0 +1,63 @@
+/*******************************************
+ * Author: Nicholas Patchett    
+ * Date: 08/05/19
+ * Task: Write a program that behaves like an 
+ * "AI" and asks the user multiple questions.
+ * ********************************************/
+
+/*Some questions depend on the answers to previous questions
+Some answers are remembered and come back as part of later questions
+The programme never ends – it can go back and re-ask questions and overwrite previous answers
+The “AI” picks up on inconsistent answers(e.g. if the user answers one question with a yes and later contradicts this, the AI will respond accordingly)*/
+
+
+using System;
+
+namespace ProfPracAIProject
+{
+    class Program
+    {
+
+        static void Main()
+
+        {
+            //Declare variables
+
+            Random rand = new Random();
+            int count = 0;
+            int cpu1, cpu2, cpu3, cpu4, cpu5, cpu6, cpu7, cpu8, cpu9, cpu10;
+            int user1, user2, user3, user4, user5, user6, user7, user8, user9, user10;
+            int digit1, digit2;
+            bool goNext = false;
+            char nextQ = 'n';
+
+            //question 1
+
+            while (nextQ == 'n')
+            {
+
+                digit1 = rand.Next(13);
+                digit2 = rand.Next(13);
+                cpu1 = digit1 * digit2;
+                Console.WriteLine($"What is {digit1}  * {digit2}");
+                user1 = Convert.ToInt32(Console.ReadLine());
+
+                if (user1 == cpu1)
+                {
+                    count++;
+                    Console.WriteLine("Correct!");
+                }
+
+                else
+                {
+                    Console.WriteLine("Incorrect.");
+                }
+
+                Console.WriteLine("Do you want to proceed? y/n");
+                nextQ = Convert.ToChar(Console.ReadLine());
+
+
+            }
+        }
+    }
+}
