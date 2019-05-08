@@ -1,0 +1,75 @@
+/*An AI that acts as a maths teacher that asks maths questions and makes them easier or 
+ * harder depending on how many concurrent answers the user got wrong or right in a row
+ *Author: Reuben Watt
+ *Date: 08.05.19
+ */
+
+using System;
+using System.Threading;
+
+namespace ProfPracAI
+{
+    class MathsTeacher
+    {
+        public static void Main(string[] args)
+        {
+            int answer1, answer2, answer3, answer4, answer5, count = 0, digit1, digit2, compAnswer;
+            Random rand = new Random();
+            char goAgain;
+            do
+            {
+                digit1 = rand.Next(13);
+                digit2 = rand.Next(13);
+                compAnswer = digit1 * digit2;
+                Console.Write($"{digit1} * {digit2} = ");
+                answer1 = Convert.ToInt16(Console.ReadLine());
+                if (answer1 == compAnswer)
+                {
+                    count++;
+                    Console.WriteLine("Correct");
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect");
+                    Thread.Sleep(1000);
+                }
+                Console.WriteLine("Would you like to do another basic multiplication question? (y/n)");
+                goAgain = Convert.ToChar(Console.ReadLine());
+            } while (goAgain == 'y');
+            digit1 = rand.Next(101);
+            digit2 = rand.Next(digit1);
+            compAnswer = digit1 + digit2;
+            Console.Write($"{digit1} + {digit2} = ");
+            answer2 = Convert.ToInt16(Console.ReadLine());
+            if (answer2 == compAnswer)
+            {
+                count++;
+                Console.WriteLine("Correct");
+                Thread.Sleep(1000);
+            }
+            else
+            {
+                Console.WriteLine("Incorrect");
+                Thread.Sleep(1000);
+            }
+            digit1 = rand.Next(101);
+            digit2 = rand.Next(digit1);
+            compAnswer = digit1 * digit2;
+            Console.Write($"{digit1} * {digit2} = ");
+            answer1 = Convert.ToInt16(Console.ReadLine());
+            if (answer1 == compAnswer)
+            {
+                count++;
+                Console.WriteLine("Correct");
+                Thread.Sleep(1000);
+            }
+            else
+            {
+                Console.WriteLine("Incorrect");
+                Thread.Sleep(1000);
+            }
+            Console.ReadLine();
+        }
+    }
+}
