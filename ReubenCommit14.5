@@ -1,0 +1,249 @@
+/*An AI that acts as a maths teacher that asks maths questions and makes them easier or 
+ * harder depending on how many concurrent answers the user got wrong or right in a row
+ *Author: Reuben Watt
+ *Date: 08.05.19
+ */
+
+using System;
+using System.Threading;
+
+namespace ProfPracAI
+{
+    class MathsTeacher
+    {
+        public static void Main(string[] args)
+        {
+            int answer1, count = 0, digit1, digit2, compAnswer, required = 5, wordOrNum;
+            Random rand = new Random();
+            char goAgain;
+            char[] scientific = { 'E', 'P', 'T', 'G', 'M', 'k', 'm', 'μ', 'n', 'p', 'f', 'a' };
+            string[] scientificWords = { "exa", "peta", "tera", "giga", "mega", "kilo", "milli", "micro", "nano", "pico", "femto", "atto" };
+            string[] scientificNums = { "10^18", "10^15", "10^12", "10^9", "10^6", "10^3", "10^-3", "10^-6", "10^-9", "10^-12", "10^-15" };
+
+            Console.WriteLine("Welcome to Math Teacher AI, first up is basic multiplication");
+            do
+            {
+                digit1 = rand.Next(13);
+                digit2 = rand.Next(13);
+                compAnswer = digit1 * digit2;
+                Console.Write($"{digit1} * {digit2} = ");
+                answer1 = Convert.ToInt16(Console.ReadLine());
+                if (answer1 == compAnswer)
+                {
+                    count++;
+                    Console.WriteLine("Correct");
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect");
+                    Thread.Sleep(1000);
+                }
+                if (count >= required)
+                {
+                    Console.Write("You have answered the required amount of questions correctly. would you like to move on to addition? (y/n) ");
+                    goAgain = Convert.ToChar(Console.ReadLine());
+                }
+                else
+                {
+                    Console.WriteLine($"You must have at least {required} questions correct to move on to addition. you currently have {count}.");
+                    goAgain = 'n';
+                }
+            } while (goAgain == 'n');
+            count = 0;
+            Console.Clear();
+            Console.WriteLine("Congrats! You passed multiplication, next is basic addition");
+            do
+            {
+                digit1 = rand.Next(101);
+                digit2 = rand.Next(digit1);
+                compAnswer = digit1 + digit2;
+                Console.Write($"{digit1} + {digit2} = ");
+                answer1 = Convert.ToInt16(Console.ReadLine());
+                if (answer1 == compAnswer)
+                {
+                    count++;
+                    Console.WriteLine("Correct");
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect");
+                    Thread.Sleep(1000);
+                }
+                if (count >= required)
+                {
+                    Console.Write("You have answered the required amount of questions correctly. would you like to move on to subtraction? (y/n) ");
+                    goAgain = Convert.ToChar(Console.ReadLine());
+                }
+                else
+                {
+                    Console.WriteLine($"You must have at least {required} questions correct to move on to subtraction. you currently have {count}.");
+                    goAgain = 'n';
+                }
+            } while (goAgain == 'n');
+            count = 0;
+            Console.Clear();
+            Console.WriteLine("Congrats! You passed addition, next is basic subtraction");
+            do
+            {
+                digit1 = rand.Next(101);
+                digit2 = rand.Next(digit1);
+                compAnswer = digit1 - digit2;
+                Console.Write($"{digit1} - {digit2} = ");
+                answer1 = Convert.ToInt16(Console.ReadLine());
+                if (answer1 == compAnswer)
+                {
+                    count++;
+                    Console.WriteLine("Correct");
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect");
+                    Thread.Sleep(1000);
+                }
+                if (count >= required)
+                {
+                    Console.Write("You have answered the required amount of questions correctly. would you like to move on to division? (y/n) ");
+                    goAgain = Convert.ToChar(Console.ReadLine());
+                }
+                else
+                {
+                    Console.WriteLine($"You must have at least {required} questions correct to move on to division. you currently have {count}.");
+                    goAgain = 'n';
+                }
+            } while (goAgain == 'n');
+            count = 0;
+            Console.Clear();
+            Console.WriteLine("Congrats! You passed subtraction, next is basic division");
+            do
+            {
+                do
+                {
+                    digit1 = rand.Next(2, 101);
+                    digit2 = rand.Next(1, digit1);
+                } while (digit1 % digit2 != 0);
+                compAnswer = digit1 / digit2;
+                Console.Write($"{digit1} / {digit2} = ");
+                answer1 = Convert.ToInt16(Console.ReadLine());
+                if (answer1 == compAnswer)
+                {
+                    count++;
+                    Console.WriteLine("Correct");
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect");
+                    Thread.Sleep(1000);
+                }
+                if (count >= required)
+                {
+                    Console.Write("You have answered the required amount of questions correctly. would you like to something more difficult? (y/n) ");
+                    goAgain = Convert.ToChar(Console.ReadLine());
+                }
+                else
+                {
+                    Console.WriteLine($"You must have at least {required} questions correct to move on. you currently have {count}.");
+                    goAgain = 'n';
+                }
+            } while (goAgain == 'n');
+            Console.Clear();
+            Console.WriteLine("Congrats! You passed basic mathematics, next is standard & scientific notation.");
+            Console.WriteLine("Asnwer the questions accordingly");
+            for (int i = 0; i <= scientific.Length; i++)
+            {
+                wordOrNum = rand.Next(6);
+                switch (wordOrNum)
+                {
+                    case 0:
+                        Console.WriteLine($"Write the correct name this symbol corresponds to: '{scientific[i]}'");
+                        if (Console.ReadLine().ToLower() == scientificWords[i])
+                        {
+                            count++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                    case 1:
+                        Console.WriteLine($"Write the correct exponent (E.g. 10^x) this symbol corresponds to: '{scientific[i]}'");
+                        if (Console.ReadLine() == scientificNums[i])
+                        {
+                            count++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                    case 2:
+                        Console.WriteLine($"Write the correct symbol this name corresponds to: '{scientificWords[i]}'");
+                        if (Convert.ToChar(Console.ReadLine()) == scientific[i])
+                        {
+                            count++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                    case 3:
+                        Console.WriteLine($"Write the correct exponent (E.g. 10^x) this name corresponds to: '{scientificWords[i]}'");
+                        if (Console.ReadLine() == scientificNums[i])
+                        {
+                            count++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                    case 4:
+                        Console.WriteLine($"Write the correct name this exponent corresponds to: '{scientificNums[i]}'");
+                        if (Console.ReadLine().ToLower() == scientificWords[i])
+                        {
+                            count++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                    case 5:
+                        Console.WriteLine($"Write the correct symbol this exponent corresponds to: '{scientificNums[i]}'");
+                        if (Convert.ToChar(Console.ReadLine()) == scientific[i])
+                        {
+                            count++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                }
+            }
+            Console.ReadLine();
+        }
+    }
+}
