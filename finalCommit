@@ -1,0 +1,365 @@
+/*******************************************
+ * Author: Nicholas Patchett    
+ * Date: 08/05/19
+ * Task: Write a program that behaves like an 
+ * "AI" and asks the user multiple questions.
+ * ********************************************/
+
+/*Some questions depend on the answers to previous questions
+Some answers are remembered and come back as part of later questions
+The programme never ends – it can go back and re-ask questions and overwrite previous answers
+The “AI” picks up on inconsistent answers(e.g. if the user answers one question with a yes
+and later contradicts this, the AI will respond accordingly)*/
+
+
+using System;
+using System.Threading;
+
+namespace ProfPracAIProject
+{
+    class Program
+    {
+
+        static void Main()
+
+        {
+            //Declare variables
+
+            Random rand = new Random();
+            const int REQUIRED = 5;
+            int questionsCorrect = 0, questionsAnswered = 0;
+            int q1count = 0, q1total = 0, q2count = 0, q2total = 0, q3count = 0, q3total = 0, q4count = 0, q4total = 0, q5count = 0, q5total = 0;
+            int cpu1, cpu2;
+            int user1, user2;
+            int digit1, digit2, digit3, digit4;
+            int wordOrNum;
+            char nextQ1 = 'n', nextQ2 = 'n', nextQ3 = 'n', nextQ4 = 'n';
+            char[] scientific = { 'E', 'P', 'T', 'G', 'M', 'k', 'm', 'μ', 'n', 'p', 'f', 'a' };
+            string[] scientificWords = { "exa", "peta", "tera", "giga", "mega", "kilo", "milli", "micro", "nano", "pico", "femto", "atto" };
+            string[] scientificNums = { "10^18", "10^15", "10^12", "10^9", "10^6", "10^3", "10^-3", "10^-6", "10^-9", "10^-12", "10^-15" , "10^-18"};
+
+            //question 1
+
+            Console.WriteLine("Welcome to the Teacher AI.");
+            Console.WriteLine("This section is for practice with multiplication.");
+            Console.WriteLine($"You need {REQUIRED} corect answers to move on to the next section");
+
+            while (nextQ1 == 'n')
+            {
+
+                digit1 = rand.Next(13);
+                digit2 = rand.Next(13);
+                cpu1 = digit1 * digit2;
+                Console.WriteLine($"What is {digit1}  * {digit2}");
+                user1 = Convert.ToInt32(Console.ReadLine());
+
+                if (user1 == cpu1)
+                {
+                    q1count++;
+                    q1total++;
+                    questionsCorrect++;
+                    questionsAnswered++;
+                    Console.WriteLine("Correct!");
+                }
+
+                else
+                {
+                    Console.WriteLine("Incorrect.");
+                    Console.WriteLine($"The correct answer was {cpu1}");
+                    q1total++;
+                    questionsAnswered++;
+                }
+
+                if (q1total >= REQUIRED)
+                {
+
+                    if (q1count >= REQUIRED)
+                    {
+
+                        Console.WriteLine($"Well done, so far your score is {q1count}/{q1total}");
+                        Console.WriteLine($"You have met the requirement of {REQUIRED} to move on to the next section");
+                        Console.WriteLine("Do you want to proceed to the next section? y/n");
+                        nextQ1 = Convert.ToChar(Console.ReadLine());
+                    }
+
+                    if (q1count < REQUIRED)
+                    {
+                        Console.WriteLine($"So far your score is {q1count}/{q1total}");
+                        Console.WriteLine("Maths is hard.");
+                    }
+                }
+
+            }
+
+            //Question 2
+
+            Console.Clear();
+            Console.WriteLine("This section is for practice with addition.");
+            Console.WriteLine($"You need {REQUIRED} corect answers to move on to the next section");
+
+            while (nextQ2 == 'n')
+            {
+
+                digit3 = rand.Next(100);
+                digit4 = rand.Next(100);
+                cpu2 = digit3 + digit4;
+                Console.WriteLine($"What is {digit3} + {digit4}");
+                user2 = Convert.ToInt32(Console.ReadLine());
+
+                if (user2 == cpu2)
+                {
+                    q2count++;
+                    q2total++;
+                    questionsCorrect++;
+                    questionsAnswered++;
+                    Console.WriteLine("Correct!");
+                }
+
+                else
+                {
+                    Console.WriteLine("Incorrect.");
+                    Console.WriteLine($"The correct answer was {cpu2}");
+                    q2total++;
+                    questionsAnswered++;
+                }
+
+                if (q2total >= REQUIRED)
+                {
+
+                    if (q2count >= REQUIRED)
+                    {
+
+                        Console.WriteLine($"Well done, so far your score is {q2count}/{q2total}");
+                        Console.WriteLine($"You have met the requirement of {REQUIRED} to move on to the next section");
+                        Console.WriteLine("Do you want to proceed to the next section? y/n");
+                        nextQ2 = Convert.ToChar(Console.ReadLine());
+                    }
+
+                    if (q2count < REQUIRED)
+                    {
+                        Console.WriteLine($"So far your score is {q2count}/{q2total}");
+                        Console.WriteLine("Maths is hard");
+                    }
+                }
+
+            }
+
+            //question 3
+
+            Console.Clear();
+            Console.WriteLine("This section is for practice with subtraction.");
+            Console.WriteLine($"You need {REQUIRED} corect answers to move on to the next section");
+
+            while (nextQ3 == 'n')
+            {
+
+                digit1 = rand.Next(101);
+                digit2 = rand.Next(digit1);
+                cpu1 = digit1 - digit2;
+                Console.WriteLine($"What is {digit1}  - {digit2}");
+                user1 = Convert.ToInt32(Console.ReadLine());
+
+                if (user1 == cpu1)
+                {
+                    q3count++;
+                    q3total++;
+                    questionsCorrect++;
+                    questionsAnswered++;
+                    Console.WriteLine("Correct!");
+                }
+
+                else
+                {
+                    Console.WriteLine("Incorrect.");
+                    Console.WriteLine($"The correct answer was {cpu1}");
+                    q3total++;
+                    questionsAnswered++;
+                }
+
+                if (q3total >= REQUIRED)
+                {
+
+                    if (q3count >= REQUIRED)
+                    {
+
+                        Console.WriteLine($"Well done, so far your score is {q3count}/{q3total}");
+                        Console.WriteLine($"You have met the requirement of {REQUIRED} to move on to the next section");
+                        Console.WriteLine("Do you want to proceed to the next section? y/n");
+                        nextQ3 = Convert.ToChar(Console.ReadLine());
+                    }
+
+                    if (q3count < REQUIRED)
+                    {
+                        Console.WriteLine($"So far your score is {q3count}/{q3total}");
+                        Console.WriteLine("Maths is hard.");
+                    }
+                }
+            }
+
+            //question 4
+
+            Console.Clear();
+            Console.WriteLine("This section is for practice with division.");
+            Console.WriteLine($"You need {REQUIRED} corect answers to move on to the next section");
+
+            while (nextQ4 == 'n')
+            {
+                do
+                {
+                    digit1 = rand.Next(2, 101);
+                    digit2 = rand.Next(1, digit1);
+                } while (digit1 % digit2 != 0);
+                cpu1 = digit1 / digit2;
+                Console.WriteLine($"What is {digit1}  / {digit2}");
+                user1 = Convert.ToInt32(Console.ReadLine());
+
+                if (user1 == cpu1)
+                {
+                    q4count++;
+                    q4total++;
+                    questionsCorrect++;
+                    questionsAnswered++;
+                    Console.WriteLine("Correct!");
+                }
+
+                else
+                {
+                    Console.WriteLine("Incorrect.");
+                    Console.WriteLine($"The correct answer was {cpu1}");
+                    q4total++;
+                    questionsAnswered++;
+                }
+
+                if (q4total >= REQUIRED)
+                {
+
+                    if (q4count >= REQUIRED)
+                    {
+
+                        Console.WriteLine($"Well done, so far your score is {q4count}/{q4total}");
+                        Console.WriteLine($"You have met the requirement of {REQUIRED} to move on to the next section");
+                        Console.WriteLine("Do you want to proceed to the next section? y/n");
+                        nextQ4 = Convert.ToChar(Console.ReadLine());
+                    }
+
+                    if (q4count < REQUIRED)
+                    {
+                        Console.WriteLine($"So far your score is {q4count}/{q4total}");
+                        Console.WriteLine("Maths is hard.");
+                    }
+                }
+
+            }
+
+            Console.Clear();
+            Console.WriteLine($"Congrats! You passed basic mathematics with a total score of {questionsCorrect}/{questionsAnswered}, next is standard & scientific notation.");
+            Console.WriteLine("Asnwer the questions accordingly");
+            for (int i = 0; i < scientific.Length; i++)
+            {
+                wordOrNum = rand.Next(6);
+                switch (wordOrNum)
+                {
+                    case 0:
+                        Console.WriteLine($"Write the correct name this symbol corresponds to: '{scientific[i]}'");
+                        if (Console.ReadLine().ToLower() == scientificWords[i])
+                        {
+                            q5count++;
+                            q5total++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            q5total++;
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                    case 1:
+                        Console.WriteLine($"Write the correct exponent (E.g. 10^x) this symbol corresponds to: '{scientific[i]}'");
+                        if (Console.ReadLine() == scientificNums[i])
+                        {
+                            q5count++;
+                            q5total++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            q5total++;
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                    case 2:
+                        Console.WriteLine($"Write the correct symbol this name corresponds to: '{scientificWords[i]}'");
+                        if (Convert.ToChar(Console.ReadLine()) == scientific[i])
+                        {
+                            q5count++;
+                            q5total++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            q5total++;
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                    case 3:
+                        Console.WriteLine($"Write the correct exponent (E.g. 10^x) this name corresponds to: '{scientificWords[i]}'");
+                        if (Console.ReadLine() == scientificNums[i])
+                        {
+                            q5count++;
+                            q5total++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            q5total++;
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                    case 4:
+                        Console.WriteLine($"Write the correct name this exponent corresponds to: '{scientificNums[i]}'");
+                        if (Console.ReadLine().ToLower() == scientificWords[i])
+                        {
+                            q5count++;
+                            q5total++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            q5total++;
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                    case 5:
+                        Console.WriteLine($"Write the correct symbol this exponent corresponds to: '{scientificNums[i]}'");
+                        if (Convert.ToChar(Console.ReadLine()) == scientific[i])
+                        {
+                            q5count++;
+                            q5total++;
+                            Console.WriteLine("Correct");
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            q5total++;
+                            Console.WriteLine("Incorrect");
+                            Thread.Sleep(1000);
+                        }
+                        break;
+                }
+            }
+            Console.WriteLine($"Well done! Your score for scientific and standard notation is {q5count}/{q5total}");
+            Console.WriteLine("You're welcome for my Maths assistance. Goodbye");
+            Thread.Sleep(10000);
+        }
+    }
+}
