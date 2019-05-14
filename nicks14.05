@@ -1,0 +1,150 @@
+/*******************************************
+ * Author: Nicholas Patchett    
+ * Date: 08/05/19
+ * Task: Write a program that behaves like an 
+ * "AI" and asks the user multiple questions.
+ * ********************************************/
+
+/*Some questions depend on the answers to previous questions
+Some answers are remembered and come back as part of later questions
+The programme never ends – it can go back and re-ask questions and overwrite previous answers
+The “AI” picks up on inconsistent answers(e.g. if the user answers one question with a yes
+and later contradicts this, the AI will respond accordingly)*/
+
+
+using System;
+
+namespace ProfPracAIProject
+{
+    class Program
+    {
+
+        static void Main()
+
+        {
+            //Declare variables
+
+            Random rand = new Random();
+            const int REQUIRED = 5;
+            int questionsCorrect = 0, questionsAnswered = 0;
+            int q1count = 0, q1total = 0, q2count = 0, q2total = 0;
+            int cpu1, cpu2;
+            int user1, user2;
+            int digit1, digit2, digit3, digit4;
+            char nextQ1 = 'n', nextQ2 = 'n';
+
+            //question 1
+
+            Console.WriteLine("Welcome to the Teacher AI.");
+            Console.WriteLine("This section is for practice with multiplication.");
+            Console.WriteLine($"You need {REQUIRED} corect answers to move on to the next section");
+            Console.ReadLine();
+
+            while (nextQ1 == 'n')
+            {
+
+                digit1 = rand.Next(13);
+                digit2 = rand.Next(13);
+                cpu1 = digit1 * digit2;
+                Console.WriteLine($"What is {digit1}  * {digit2}");
+                user1 = Convert.ToInt32(Console.ReadLine());
+
+                if (user1 == cpu1)
+                {
+                    q1count++;
+                    q1total++;
+                    questionsCorrect++;
+                    questionsAnswered++;
+                    Console.WriteLine("Correct!");
+                }
+
+                else
+                {
+                    Console.WriteLine("Incorrect.");
+                    Console.WriteLine($"The correct answer was {cpu1}");
+                    q1total++;
+                    questionsAnswered++;
+                }
+
+                if (q1total >= REQUIRED)
+                {
+
+                    if (q1count >= REQUIRED)
+                    {
+
+                        Console.WriteLine($"Well done, so far your score is {q1count}/{q1total}");
+                        Console.WriteLine($"You have met the requirement of {REQUIRED} to move on to the next section");
+                        Console.WriteLine("Do you want to proceed to the next section? y/n");
+                        nextQ1 = Convert.ToChar(Console.ReadLine());
+                    }
+
+                    if (q1count < REQUIRED)
+                    {
+                        Console.WriteLine($"So far your score is {q1count}/{q1total}");
+                        Console.WriteLine("Maths is hard.");
+                    }
+                }
+
+            }
+
+            //Question 2
+
+            Console.Clear();
+            Console.WriteLine("This section is for practice with addition.");
+            Console.WriteLine($"You need {REQUIRED} corect answers to move on to the next section");
+            Console.ReadLine();
+
+            while (nextQ2 == 'n')
+            {
+
+                digit3 = rand.Next(100);
+                digit4 = rand.Next(100);
+                cpu2 = digit3 + digit4;
+                Console.WriteLine($"What is {digit3} + {digit4}");
+                user2 = Convert.ToInt32(Console.ReadLine());
+
+                if (user2 == cpu2)
+                {
+                    q2count++;
+                    q2total++;
+                    questionsCorrect++;
+                    questionsAnswered++;
+                    Console.WriteLine("Correct!");
+                }
+
+                else
+                {
+                    Console.WriteLine("Incorrect.");
+                    Console.WriteLine($"The correct answer was {cpu2}");
+                    q2total++;
+                    questionsAnswered++;
+                }
+
+                if (q2total >= REQUIRED)
+                {
+
+                    if (q2count >= REQUIRED)
+                    {
+
+                        Console.WriteLine($"Well done, so far your score is {q2count}/{q2total}");
+                        Console.WriteLine($"You have met the requirement of {REQUIRED} to move on to the next section");
+                        Console.WriteLine("Do you want to proceed to the next section? y/n");
+                        nextQ2 = Convert.ToChar(Console.ReadLine());
+                    }
+
+                    if (q2count < REQUIRED)
+                    {
+                        Console.WriteLine($"So far your score is {q2count}/{q2total}");
+                        Console.WriteLine("Maths is hard");
+                    }
+                }
+
+            }
+
+
+           
+
+
+        }
+    }
+}
